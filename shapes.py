@@ -23,11 +23,11 @@ class Shape(Enum):
     
     
 class Shape(Enum):
-    FIVE = [1, 1, 1, 1, 1]
-    FOUR = [1, 1, 1, 1]
-    THREE = [1, 1, 1]
-    TWO = [1, 1]
-    ONE = [1]
+    FIVE = [[1, 1, 1, 1, 1]]
+    FOUR = [[1, 1, 1, 1]]
+    THREE = [[1, 1, 1]]
+    TWO = [[1, 1]]
+    ONE = [[1]]
     SQUARE = [[1, 1], [1, 1]]
     CROSS = [[0, 1, 0], [1, 1, 1], [0, 1, 0]]
     STEP = [[1, 0], [1, 1]]
