@@ -1,27 +1,10 @@
 from enum import Enum
 import numpy as np
+import random
 
 
-"""
-class Shape(Enum):
-    FIVE = np.array([1, 1, 1, 1, 1])
-    FOUR = np.array([1, 1, 1, 1])
-    THREE = np.array([1, 1, 1])
-    TWO = np.array([1, 1])
-    ONE = np.array([1])
-    SQUARE = np.array([[1, 1], [1, 1]])
-    CROSS = np.array([[0, 1, 0], [1, 1, 1], [0, 1, 0]])
-    STEP = np.array([[1, 0], [1, 1]])
-    LARGE_STEP = np.array([[1, 0, 0], [1, 1, 0], [0, 1, 1]])
-    DIAG_THREE = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
-    DIAG_TWO = np.array([[1, 0], [0, 1]])
-    L = np.array([[1, 0, 0], [1, 1, 1]])
-    RIGHT_ANGLE = np.array([[1, 0, 0], [1, 0, 0], [1, 1, 1]])
-    T = np.array([[1, 1, 1], [0, 1, 0], [0, 1, 0]])
-    SHORT_T = np.array([[1, 1, 1], [0, 1, 0]])
-    """
-    
-    
+
+
 class Shape(Enum):
     FIVE = [[1, 1, 1, 1, 1]]
     FOUR = [[1, 1, 1, 1]]
@@ -38,5 +21,16 @@ class Shape(Enum):
     RIGHT_ANGLE = [[1, 0, 0], [1, 0, 0], [1, 1, 1]]
     T = [[1, 1, 1], [0, 1, 0], [0, 1, 0]]
     SHORT_T = [[1, 1, 1], [0, 1, 0]]
+    
+    def getValue(self):
+        return np.array(self.value, dtype="int8")
+
+
+def getRandomShape() -> np.ndarray:
+    choice = random.choice([x for x in Shape])
+
+    rtn = choice.getValue()
+    
+    return np.rot90(rtn, k=random.randint(0, 3))
 
     

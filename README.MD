@@ -1,0 +1,1 @@
+This is a project that recreates the mobile game Blockudoku and then adds various solver on top which use different techniques to play the game, hopefully perfectly
