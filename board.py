@@ -1,7 +1,7 @@
 import numpy as np
 import math
 from shapes import Shape
-
+import copy
 
 
 class Board:
@@ -58,21 +58,22 @@ class Board:
         multiplier = 1
         
         if customBoard is None:
-            newBoard = np.copy(self.data)
+            inpBoard = np.copy(self.data)
         else:
-            newBoard = customBoard
+            inpBoard = customBoard
+        newBoard = copy.deepcopy(inpBoard)
         
         # Check cols
-        for colIdx in range(self.data.shape[1]):
-            col = self.data[:, colIdx]
+        for colIdx in range(inpBoard.shape[1]):
+            col = inpBoard[:, colIdx]
             if np.all(col == 1):
                 scoreInc += 18
                 newBoard[:, colIdx] = 0
                 combos += 1
                 
         # Check rows
-        for rowIdx in range(self.data.shape[0]):
-            row = self.data[rowIdx, :]
+        for rowIdx in range(inpBoard.shape[0]):
+            row = inpBoard[rowIdx, :]
             if np.all(row == 1):
                 scoreInc += 18
                 newBoard[rowIdx, :] = 0
@@ -83,7 +84,7 @@ class Board:
             x = 3 * math.floor(i/3)
             y =  3 * (i % 3)
             
-            sqr = self.data[x : x + 3, y : y + 3]
+            sqr = inpBoard[x : x + 3, y : y + 3]
             if np.all(sqr == 1):
                 scoreInc += 18
                 newBoard[x : x + 3, y : y + 3] = 0    
@@ -106,13 +107,11 @@ class Board:
         return newBoard, scoreInc, multiplier
 
     def showBoard(self):
-        print("*"*18)
         for row in self.data:
             rowString = np.array2string(row)
             rowString = rowString.replace("[", "").replace("]", "")
             rowString = rowString.replace("1", "\u220e").replace("0", "_")
             
             print(rowString)
-            
-        print("*"*18)
+        
         

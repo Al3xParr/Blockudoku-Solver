@@ -33,4 +33,11 @@ def getRandomShape() -> np.ndarray:
     
     return np.rot90(rtn, k=random.randint(0, 3))
 
+
+def printShape(shape: np.ndarray) -> None:
+    for row in shape:
+        rowString = np.array2string(row)
+        rowString = rowString.replace("[", "").replace("]", "")
+        rowString = rowString.replace("1", "\u220e").replace("0", "_")
+        print(rowString)
     

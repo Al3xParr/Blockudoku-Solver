@@ -8,21 +8,26 @@ class DumbPlayer(Player):
     
     def decideMove(self, board: Board, shapes: list) -> tuple:
         bestMove = None
-        bestMoveScore = None
+        bestMoveScore = 0
+        bestShape = None
+        possibles = 0
         
-        for col in range(9):
-            for row in range(9):
-                _, score = board.evaluateMove(shapes[0], (row, col))
-                if score is not None:
-                    if score > 0 if bestMoveScore is None else bestMoveScore:
-                        bestMove = (row, col)
-                        bestMoveScore = score
+        
+        for i in range(len(shapes)):
+            for col in range(9):
+                for row in range(9):
+                    _, score = board.evaluateMove(shapes[i], (row, col))
+                    if score is not None:
+                        if score > bestMoveScore:
+                            possibles += 1
+                            bestMove = (row, col)
+                            bestMoveScore = score
+                            bestShape = i
                     
         if bestMove is None:
             print("no available moves")
             return None, None
               
-        
-        return 0, bestMove        
+        return bestShape, bestMove
                             
         
