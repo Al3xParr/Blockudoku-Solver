@@ -40,4 +40,10 @@ def printShape(shape: np.ndarray) -> None:
         rowString = rowString.replace("[", "").replace("]", "")
         rowString = rowString.replace("1", "\u220e").replace("0", "_")
         print(rowString)
+        
+        
+class Move():
+    def __init__(self, shape: np.ndarray, location: tuple) -> None:
+        self.shape = shape
+        self.location = location
     

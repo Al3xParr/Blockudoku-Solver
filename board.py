@@ -9,6 +9,7 @@ class Board:
     def __init__(self) -> None:
         self.data = np.zeros((9, 9), dtype="int8")
         self.score = 0
+        self.moves = 0
     
     
     # Evaluates the outcome of a move, returning a tuple of (board after move, score increment)
@@ -46,6 +47,7 @@ class Board:
 
         self.data = newBoard
         self.score += scoreInc
+        self.moves += 1
         return True
 
     

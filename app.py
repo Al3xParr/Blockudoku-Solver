@@ -1,13 +1,11 @@
 from board import Board
 from shapes import Shape, getRandomShape
-from Players.dumbPlayer import DumbPlayer
+from Players.dumbPlayer import DumbPlayer, Player
 import numpy as np
 import copy
 
-def startGame():
+def startGame(board: Board, player: Player):
     # Initialise everything
-    board = Board()
-    aiPlayer = DumbPlayer()
     continuePlay = True
     moveCount = 0
 
@@ -15,7 +13,7 @@ def startGame():
         shapeOptions = [getRandomShape() for j in range(3)]
 
         while len(shapeOptions) > 0: 
-            choiceIdx, location = aiPlayer.decideMove(board, shapeOptions)
+            choiceIdx, location = player.decideMove(board, shapeOptions)
             ogBoard = copy.deepcopy(board)
             if choiceIdx == None and location == None:
                 continuePlay = False
@@ -24,7 +22,7 @@ def startGame():
             
             board.placeShape(shapeOptions[choiceIdx], location)
             print("Move made: {}".format(moveCount))
-            #showPlay(ogBoard, board, shapeOptions, choiceIdx)
+            showPlay(ogBoard, board, shapeOptions, choiceIdx)
             
             shapeOptions.pop(choiceIdx)
 
@@ -49,6 +47,7 @@ def showPlay(ogBoard: Board, newBoard: Board, ops: list, choice: int) -> None:
         print("Board After Move:")
         newBoard.showBoard()
     print("Score After Move: {}".format(newBoard.score))
+    print("Number of Moves Played: {}".format(newBoard.moves))
     print("*"*30)
         
 def printShapes(shapeList: list) -> None:
@@ -78,5 +77,6 @@ def printShapes(shapeList: list) -> None:
     
 if __name__ == "__main__":
     
-    
-    startGame()
+    board = Board()
+    player = DumbPlayer()
+    startGame(board, player)
