@@ -5,12 +5,8 @@ from board import Board
 
 class Player:
     def __init__(self) -> None:
-        pass
-    
-    
-    def playMove(self, board: np.ndarray, shape: Shape) -> bool:
-        pass
+        self.movesPlayed = []
     
 
-    def decideMove(self, board: Board, shapes: list) -> tuple:
+    def decideMove(self, board: Board, shapes: list, silent: bool = False) -> tuple:
         pass

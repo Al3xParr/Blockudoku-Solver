@@ -1,12 +1,17 @@
 from .players import Player
 from board import Board
+from shapes import Move
 
+# This example of a player will paly the move given the sahpe options 
+# and board that will give the immediate best score after that one move.
+# If multiple 
 class DumbPlayer(Player):
     
     def __init__(self) -> None:
-        pass
+        super().__init__()
+
     
-    def decideMove(self, board: Board, shapes: list) -> tuple:
+    def decideMove(self, board: Board, shapes: list, silent: bool = False) -> tuple:
         bestMove = None
         bestMoveScore = 0
         bestShape = None
@@ -25,8 +30,10 @@ class DumbPlayer(Player):
                             bestShape = i
                     
         if bestMove is None:
-            print("no available moves")
+            if not silent: print("no available moves")
             return None, None
+        
+        self.movesPlayed.append(Move(shapes[bestShape], bestMove))
               
         return bestShape, bestMove
                             
