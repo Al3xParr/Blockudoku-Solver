@@ -11,6 +11,7 @@ class MidPlayer(Player):
     
     def __init__(self) -> None:
         super().__init__()
+        self.name = "Mid"
 
     
     def decideMove(self, board: Board, shapes: list, silent: bool = False) -> tuple:
@@ -32,10 +33,12 @@ class MidPlayer(Player):
                         if score > bestMoveScore:
                             bestMove = (row, col)
                             bestMoveScore = score
+                            bestBoardRating = boardRating
                             bestShape = i
-                        elif score == bestMoveScore and boardRating > bestBoardRating:
+                        elif score == bestMoveScore and boardRating < bestBoardRating:
                             bestMove = (row, col)
                             bestMoveScore = score
+                            bestBoardRating = boardRating
                             bestShape = i
                     
         if bestMove is None:

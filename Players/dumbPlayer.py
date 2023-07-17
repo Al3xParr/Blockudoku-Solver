@@ -9,6 +9,7 @@ class DumbPlayer(Player):
     
     def __init__(self) -> None:
         super().__init__()
+        self.name = "Dumb"
 
     
     def decideMove(self, board: Board, shapes: list, silent: bool = False) -> tuple:

@@ -6,6 +6,7 @@ from board import Board
 class Player:
     def __init__(self) -> None:
         self.movesPlayed = []
+        self.name = ""
     
 
     def decideMove(self, board: Board, shapes: list, silent: bool = False) -> tuple:

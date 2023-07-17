@@ -1,6 +1,7 @@
 from board import Board
 from shapes import Shape, getRandomShape
 from Players.dumbPlayer import DumbPlayer, Player
+from Players.midPlayer import MidPlayer, Player
 import numpy as np
 import copy
 
@@ -78,5 +79,5 @@ def printShapes(shapeList: list) -> None:
 if __name__ == "__main__":
     
     board = Board()
-    player = DumbPlayer()
+    player = MidPlayer()
     startGame(board, player)

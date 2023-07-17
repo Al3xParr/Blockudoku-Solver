@@ -3,6 +3,7 @@ from shapes import getRandomShape
 from Players.dumbPlayer import DumbPlayer
 from Players.midPlayer import MidPlayer
 from Players.players import Player
+import random
 
 class Result():
     def __init__(self, moves, score) -> None:
@@ -49,10 +50,10 @@ class TestResults():
             
 
 
-def runTest(board: Board, player: Player) -> Result:
+def runTest(board: Board, player: Player, rng = None) -> Result:
 
     while True:
-        shapeOptions = [getRandomShape() for j in range(3)]
+        shapeOptions = [getRandomShape(rng) for j in range(3)]
 
         while len(shapeOptions) > 0: 
             choiceIdx, location = player.decideMove(board, shapeOptions, True)
@@ -67,20 +68,33 @@ def runTest(board: Board, player: Player) -> Result:
 
 if __name__ == "__main__":
     
-    dumbPlayer = DumbPlayer()
-    dumbPlayerResults = TestResults("Dumb")
-    midPlayer = DumbPlayer()
-    midPlayerResults = TestResults("Mid")
+    playerTypes = Player.__subclasses__()
+    playerInstances = []
+    playerResults = []
     
+    numOfGames = 10
+    seed = 5454
     
-    for i in range(10):
-        dumbPlayerResults.addResult(runTest(Board(), dumbPlayer))
+    rng = random.Random()
+    rng.seed(seed)
     
-    for i in range(10):
-        midPlayerResults.addResult(runTest(Board(), midPlayer))
-    
+    for i, p in enumerate(playerTypes):
+        
+        player = p()
+        playerInstances.append(player)
+        playerResults.append(TestResults(player.name))
+        
+        for j in range(numOfGames):
+            print("{} Player: Game {} of {}".format(player.name, j+1, numOfGames), end = "\r")
+            playerResults[i].addResult(runTest(Board(), player, rng))
+        print("                               ", end = "\r")
+        print("{} Player: Done".format(player.name)) 
+
+
     print("--------------------------------------")
     print("Player Type|Games|Avg Moves|Avg Score")
     print("-----------|-----|---------|----------")
-    dumbPlayerResults.showResultsInline()
-    midPlayerResults.showResultsInline()
+    for res in playerResults:
+        res.showResultsInline()
+    print("--------------------------------------")
+    

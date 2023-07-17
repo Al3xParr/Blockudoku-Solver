@@ -26,12 +26,13 @@ class Shape(Enum):
         return np.array(self.value, dtype="int8")
 
 
-def getRandomShape() -> np.ndarray:
-    choice = random.choice([x for x in Shape])
+def getRandomShape(rng = None) -> np.ndarray:
+    generator = rng if rng is not None else random.Random() 
+    choice = generator.choice([x for x in Shape])
 
     rtn = choice.getValue()
     
-    return np.rot90(rtn, k=random.randint(0, 3))
+    return np.rot90(rtn, k=generator.randint(0, 3))
 
 
 def printShape(shape: np.ndarray) -> None:
