@@ -1,5 +1,0 @@
-For Mid player:
-    - Additional check:
-        - check number of miniSquares each shape intersects in each place
-            Higher number is worse
-        

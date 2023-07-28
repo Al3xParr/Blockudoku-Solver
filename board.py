@@ -11,6 +11,8 @@ class Board:
         self.score = 0
         self.moves = 0
     
+    def getBoard(self) -> np.ndarray:
+        return self.data
     
     # Evaluates the outcome of a move, returning a tuple of (board after move, score increment)
     def evaluateMove(self, shape: np.ndarray, location) -> tuple:
